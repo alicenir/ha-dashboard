@@ -11,8 +11,9 @@ services:
       HA_TOKEN: ${HA_TOKEN}
       TZ: Asia/Jerusalem
       # READ_ONLY: "true"                 # view-only dashboard
-      # ALLOWED_DOMAINS: light,switch,fan,input_boolean,cover,climate,media_player,scene,script,button,vacuum
-      # EXCLUDE_ENTITIES: "^sensor\\.teslamate_.*_raw$"   # regex of entities to hide
+    volumes:
+      # Put dashboard.json here to choose which entities each panel shows (optional; auto-detects otherwise).
+      - /share/Docker/ha-dashboard:/config:ro
     security_opt:
       - no-new-privileges:true
     read_only: true

@@ -1,0 +1,47 @@
+{
+  "status": [
+    { "entity": "binary_sensor.internet", "label": "אינטרנט", "icon": "wifi" },
+    { "entity": "person.nir", "battery": "sensor.phone_battery", "icon": "home" }
+  ],
+  "power": {
+    "current": "sensor.main_current",
+    "power": "sensor.main_power",
+    "breaker": 25,
+    "today": "sensor.energy_today",
+    "month": "sensor.energy_month",
+    "car_socket": "sensor.car_socket_power",
+    "history_hours": 6
+  },
+  "weather": { "entity": "weather.forecast_home" },
+  "car": {
+    "name": "טסלה",
+    "battery": "sensor.tesla_battery_level",
+    "range": "sensor.tesla_est_battery_range_km",
+    "plugged": "binary_sensor.tesla_plugged_in",
+    "state": "sensor.tesla_state",
+    "charge_limit": "number.tesla_charge_limit",
+    "charge_switch": "switch.tesla_charger",
+    "load_balancing": "switch.load_balancing",
+    "commands_today": "sensor.tesla_commands_today",
+    "commands_limit": 30
+  },
+  "controls": {
+    "devices": [
+      "light.salon",
+      "light.lamp_1",
+      "light.lamp_2",
+      "light.kitchen",
+      { "entity": "media_player.tv", "name": "טלוויזיה", "icon": "television" }
+    ],
+    "actions": [
+      { "type": "all_lights_off", "label": "כיבוי כל האורות", "icon": "lightbulb-off-outline" },
+      { "entity": "script.good_night", "label": "לילה טוב", "icon": "weather-night" }
+    ]
+  },
+  "todo": { "entity": "todo.shopping_list" },
+  "info": [
+    { "entity": "sensor.dryer_status", "label": "מייבש", "secondary": "sensor.dryer_remaining", "icon": "tumble-dryer" },
+    { "type": "sun" },
+    { "entity": "sensor.network_connected_devices", "label": "מכשירים ברשת", "icon": "wifi" }
+  ]
+}

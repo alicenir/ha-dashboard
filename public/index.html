@@ -1,45 +1,50 @@
 <!doctype html>
-<html lang="en">
+<html lang="he" dir="rtl">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#0b0d12">
+  <meta name="theme-color" content="#18191c">
   <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <title>Home</title>
+  <title>הבית</title>
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="fonts/400.css">
+  <link rel="stylesheet" href="fonts/500.css">
+  <link rel="stylesheet" href="fonts/700.css">
   <link rel="stylesheet" href="mdi/css/materialdesignicons.min.css">
   <link rel="stylesheet" href="styles.css">
   <script src="app.js" defer></script>
 </head>
 <body>
-  <div id="offline" class="banner" hidden>
-    <span class="mdi mdi-lan-disconnect"></span>
-    <span id="offline-text">Connecting to Home Assistant…</span>
-  </div>
-
-  <header class="top">
-    <div class="hello">
+  <header class="topbar">
+    <div class="when">
       <div class="clock" id="clock">--:--</div>
-      <div class="sub"><span id="greeting">Hello</span> · <span id="date"></span></div>
+      <div class="date" id="date"></div>
     </div>
-    <div class="weather" id="weather" hidden></div>
+    <div class="pills" id="status"></div>
   </header>
 
-  <section class="people" id="people"></section>
-  <section class="summary" id="summary"></section>
-
-  <nav class="filters" id="filters" role="tablist">
-    <button data-filter="all" class="on">Rooms</button>
-    <button data-filter="light">Lights</button>
-    <button data-filter="climate">Climate</button>
-    <button data-filter="media">Media</button>
-    <button data-filter="camera">Cameras</button>
-    <button data-filter="sensor">Sensors</button>
-  </nav>
-
-  <main id="rooms"></main>
+  <main class="board">
+    <section class="panel" id="p-power"></section>
+    <section class="panel" id="p-weather"></section>
+    <section class="panel" id="p-car"></section>
+    <section class="panel" id="p-controls"></section>
+    <section class="panel" id="p-tasks">
+      <div class="ph">
+        <div class="pt"><span class="mdi mdi-format-list-checks"></span>משימות</div>
+        <span class="count" id="task-count">0</span>
+      </div>
+      <form class="task-add" id="task-form" autocomplete="off">
+        <input id="task-input" maxlength="200" placeholder="משימה חדשה..." aria-label="משימה חדשה">
+        <button type="submit" class="add" aria-label="הוספה"><span class="mdi mdi-plus"></span></button>
+      </form>
+      <ul class="tasks" id="task-list"></ul>
+      <div class="foot">לחיצה ארוכה למחיקה</div>
+    </section>
+    <section class="panel" id="p-info"></section>
+  </main>
 
   <div id="toast" class="toast" hidden></div>
 </body>
