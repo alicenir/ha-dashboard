@@ -1,7 +1,7 @@
 {
   "status": [
     { "entity": "binary_sensor.internet", "label": "אינטרנט", "icon": "wifi" },
-    { "entity": "person.nir", "battery": "sensor.phone_battery", "icon": "home" }
+    { "entity": "person.your_name", "battery": "sensor.phone_battery", "icon": "home" }
   ],
   "power": {
     "current": "sensor.main_current",

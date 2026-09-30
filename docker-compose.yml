@@ -1,19 +1,27 @@
-# Portainer stack: Stacks > Add stack > paste this, then set HA_TOKEN under "Environment variables".
+# ha-dashboard — Portainer stack / docker compose
+#
+# Portainer: Stacks > Add stack > paste this file, then add these under "Environment variables":
+#   HA_URL     = http://<home-assistant-ip>:8123
+#   HA_TOKEN   = <long-lived access token from HA: Profile > Security>
+#   CONFIG_DIR = folder on the host that holds dashboard.json (optional)
+#
+# docker compose: copy .env.example to .env, fill it in, then run `docker compose up -d`.
+
 services:
   ha-dashboard:
     image: ghcr.io/alicenir/ha-dashboard:latest
     container_name: ha-dashboard
     restart: unless-stopped
     ports:
-      - "8090:8090"
+      - "${DASHBOARD_PORT:-8090}:8090"
     environment:
-      HA_URL: http://192.168.50.29:8123
-      HA_TOKEN: ${HA_TOKEN}
-      TZ: Asia/Jerusalem
-      # READ_ONLY: "true"                 # view-only dashboard
+      HA_URL: ${HA_URL:?Set HA_URL to your Home Assistant address, e.g. http://<home-assistant-ip>:8123}
+      HA_TOKEN: ${HA_TOKEN:?Set HA_TOKEN to a Home Assistant long-lived access token}
+      TZ: ${TZ:-UTC}
+      READ_ONLY: ${READ_ONLY:-false}
     volumes:
-      # Put dashboard.json here to choose which entities each panel shows (optional; auto-detects otherwise).
-      - /share/Docker/ha-dashboard:/config:ro
+      # dashboard.json in this folder chooses which entities each panel shows (optional; auto-detects otherwise)
+      - ${CONFIG_DIR:-./config}:/config:ro
     security_opt:
       - no-new-privileges:true
     read_only: true

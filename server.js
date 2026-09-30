@@ -12,7 +12,7 @@ import WebSocket, { WebSocketServer } from 'ws';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // ---------- configuration ----------
-const HA_URL = (process.env.HA_URL || 'http://192.168.50.29:8123').replace(/\/+$/, '');
+const HA_URL = (process.env.HA_URL || '').replace(/\/+$/, '');
 const HA_TOKEN = process.env.HA_TOKEN || '';
 const PORT = Number(process.env.PORT) || 8090;
 const CONFIG_PATH = process.env.CONFIG_PATH || '/config/dashboard.json';
@@ -22,6 +22,10 @@ const ALLOWED_DOMAINS = (process.env.ALLOWED_DOMAINS ||
   'light,switch,fan,input_boolean,cover,climate,media_player,scene,script,button,vacuum,number,input_number,todo')
   .split(',').map(s => s.trim()).filter(Boolean);
 
+if (!/^https?:\/\/.+/.test(HA_URL)) {
+  console.error('HA_URL is not set. Set it to your Home Assistant address, e.g. http://<home-assistant-ip>:8123');
+  process.exit(1);
+}
 if (!HA_TOKEN) {
   console.error('HA_TOKEN is not set. Create a long-lived token in HA (Profile > Security) and set it in the stack.');
   process.exit(1);
