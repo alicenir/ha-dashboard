@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0b0d12">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Home</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="mdi/css/materialdesignicons.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div id="offline" class="banner" hidden>
+    <span class="mdi mdi-lan-disconnect"></span>
+    <span id="offline-text">Connecting to Home Assistant…</span>
+  </div>
+
+  <header class="top">
+    <div class="hello">
+      <div class="clock" id="clock">--:--</div>
+      <div class="sub"><span id="greeting">Hello</span> · <span id="date"></span></div>
+    </div>
+    <div class="weather" id="weather" hidden></div>
+  </header>
+
+  <section class="people" id="people"></section>
+  <section class="summary" id="summary"></section>
+
+  <nav class="filters" id="filters" role="tablist">
+    <button data-filter="all" class="on">Rooms</button>
+    <button data-filter="light">Lights</button>
+    <button data-filter="climate">Climate</button>
+    <button data-filter="media">Media</button>
+    <button data-filter="camera">Cameras</button>
+    <button data-filter="sensor">Sensors</button>
+  </nav>
+
+  <main id="rooms"></main>
+
+  <div id="toast" class="toast" hidden></div>
+</body>
+</html>

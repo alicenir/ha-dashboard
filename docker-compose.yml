@@ -1,0 +1,20 @@
+# Portainer stack: Stacks > Add stack > paste this, then set HA_TOKEN under "Environment variables".
+services:
+  ha-dashboard:
+    image: ghcr.io/alicenir/ha-dashboard:latest
+    container_name: ha-dashboard
+    restart: unless-stopped
+    ports:
+      - "8090:8090"
+    environment:
+      HA_URL: http://192.168.50.29:8123
+      HA_TOKEN: ${HA_TOKEN}
+      TZ: Asia/Jerusalem
+      # READ_ONLY: "true"                 # view-only dashboard
+      # ALLOWED_DOMAINS: light,switch,fan,input_boolean,cover,climate,media_player,scene,script,button,vacuum
+      # EXCLUDE_ENTITIES: "^sensor\\.teslamate_.*_raw$"   # regex of entities to hide
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /tmp
